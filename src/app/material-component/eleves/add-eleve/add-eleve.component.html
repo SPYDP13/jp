@@ -1,0 +1,87 @@
+<mat-card>
+
+  <mat-card-content>
+    <h2>Ajout d'un nouvel élève</h2>
+    <div class="container  mx-5">
+      <div class="nice-form-group">
+        <label>Nom et prénom</label>
+        <input [(ngModel)]="nom" type="text" placeholder="Nom et prenom de l'élève" />
+      </div>
+      <div class="nice-form-group">
+        <label>Date de naissance</label>
+        <input [(ngModel)]="dtn" type="date" placeholder="Date de naissance" />
+      </div>
+      <div class="nice-form-group">
+        <label>Matricule</label>
+        <input [(ngModel)]="matricule" type="text" placeholder="Numero matricule" />
+      </div>
+      <div class="nice-form-group">
+        <label>Ecole</label>
+        <input disabled [(ngModel)]="ecole" type="text" placeholder="Nom de l'école" />
+      </div>
+
+      <div class="nice-form-group"
+        style="border-width: 2px; border-color: rgb(124, 124, 124);  border-radius: 5px; padding: 15px; margin-top: 20px;">
+        <h2 class="underline">Liste des notes pour cet élève</h2>
+
+        <div *ngFor="let itemm of listeNote; let i=index" style="border-width: 1px; border-color: rgb(59 130 246);  border-radius: 1px; margin-top: 20px;">
+
+          <div class="bg-blue-500 p-3 shadow-md flex flex-row items-center justify-between">
+            <p class="text-white font-bold">Note {{i}}</p>
+            <div class="flex flex-row gap-5">
+              <button matTooltip="ExporterCSV" matTooltipPosition="above" mat-mini-fab style="background-color: aliceblue;">
+                <mat-icon color="primary">vertical_align_top</mat-icon>
+              </button>
+              <button matTooltip="Importer CSV" matTooltipPosition="above" mat-mini-fab  style="background-color: aliceblue;">
+                <mat-icon color="primary"> vertical_align_bottom</mat-icon>
+              </button>
+            </div>
+            <button (click)="deleteNote(i)" matTooltip="Supprimer la note" matTooltipPosition="above" mat-icon-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <div class="flex flex-row gap-5 justify-center items-center">
+            <div class="nice-form-group">
+              <mat-form-field>
+                <mat-select [(ngModel)]="itemm.classe" (valueChange)="classeValueChange($event,itemm)" placeholder="Classe">
+                  <mat-option>Aucun</mat-option>
+                  <mat-option *ngFor="let item of listClasses" value="{{item.idNiveau}}">{{item.nomNiveau}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="nice-form-group">
+              <mat-form-field>
+                <mat-select [(ngModel)]="itemm.anneeScolaire" placeholder="Année scolaire">
+                  <mat-option>Aucun</mat-option>
+                  <mat-option *ngFor="let item of listAnnees" value="{{item.idAnneeScolaire}}">{{item.anneeDebut}}-{{item.anneeFin}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="p-5">
+            <div *ngFor="let item of itemm.noteListe">
+              <div class="nice-form-group">
+                <label>Note en {{ getMatiereNom(item.matiere).toLowerCase()}}</label>
+                <input style="width: 100%;" [(ngModel)]="item.valeur" type="number" placeholder="Nom de l'école" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mt-10">
+          <button (click)="addNote()" mat-raised-button color="primary">Ajouter une note</button>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="mt-10 flex flex-row gap-5">
+      <button mat-raised-button (click)="validate()" color="primary">Enregistrer l'elève</button>
+      <button mat-raised-button color="warn">Annuler</button>
+    </div>
+  </mat-card-content>
+</mat-card>

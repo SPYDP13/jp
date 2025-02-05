@@ -1,0 +1,69 @@
+<mat-card>
+
+  <mat-card-content>
+    <h2>Gestion des matières</h2>
+    <div class="row" style="gap: 10px; justify-content: center;">
+      <button (click)="openDialog(1, -1,false)" matTooltip="Ajouter une nouvelle matière" matTooltipPosition="above"  mat-mini-fab>
+        <mat-icon>add</mat-icon>
+      </button>
+      <button  matTooltip="Rechercher" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button  matTooltip="ExporterCSV" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon>vertical_align_top</mat-icon>
+      </button>
+      <button  matTooltip="Importer CSV" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon> vertical_align_bottom</mat-icon>
+      </button>
+      <button matTooltip="Tout vider" matTooltipPosition="above"  mat-mini-fab color="warn">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+    <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th matListItemTitle color="primary">
+              <div *ngIf="MultipleSelect" class="row" style="justify-content: center; gap: 2px;">
+                <button mat-mini-fab color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <span *ngIf="!MultipleSelect">#</span>
+            </th>
+            <th matListItemTitle color="primary">Nom</th>
+            <th matListItemTitle color="primary">Niveau d'étude</th>
+            <th matListItemTitle color="primary">Coeficient</th>
+            <th matListItemTitle color="primary">Opération</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listMatieres; let i=index">
+            <td>
+              <mat-checkbox [(ngModel)]="item.isSelected" (change)="setMultipleSelect()" value="" color="primary" />
+            </td>
+            <td>{{item.nomMatiere}}</td>
+            <td>{{item.niveau_classe.nomNiveau}}</td>
+            <td>{{item.coef}}</td>
+            <td>
+              <button mat-icon-button matTooltip="Voir" matTooltipPosition="above" color="primary">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+              <button (click)="openDialog(1, i, true)" mat-icon-button matTooltip="Modifier" matTooltipPosition="above" color="accent">
+                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+              </button>
+
+              <button mat-icon-button matTooltip="Statistique" matTooltipPosition="above" color="accent">
+                <mat-icon aria-label="Example icon-button with a heart icon">bar_chart</mat-icon>
+              </button>
+
+              <button (click)="openDialog(2, i, false)"  mat-icon-button matTooltip="Supprimer" matTooltipPosition="above" color="warn">
+                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

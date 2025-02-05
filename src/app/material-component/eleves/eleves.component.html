@@ -1,0 +1,73 @@
+<mat-card>
+
+  <mat-card-content>
+    <h2>Gestion des élève</h2>
+    <div class="row" style="gap: 10px; justify-content: center;">
+      <button (click)="addEleves()" matTooltip="Ajouter un nouvel élève" matTooltipPosition="above"  mat-mini-fab>
+        <mat-icon>add</mat-icon>
+      </button>
+      <button  matTooltip="Rechercher" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button  matTooltip="ExporterCSV" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon>vertical_align_top</mat-icon>
+      </button>
+      <button  matTooltip="Importer CSV" matTooltipPosition="above"  mat-mini-fab color="primary">
+        <mat-icon> vertical_align_bottom</mat-icon>
+      </button>
+      <button matTooltip="Tout vider" matTooltipPosition="above"  mat-mini-fab color="warn">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </div>
+    <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th matListItemTitle color="primary">
+              <div *ngIf="MultipleSelect" class="row" style="justify-content: center; gap: 2px;">
+                <button mat-mini-fab color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <span *ngIf="!MultipleSelect">#</span>
+            </th>
+            <th matListItemTitle color="primary">Nom</th>
+            <th matListItemTitle color="primary">Date de naissance</th>
+            <th matListItemTitle color="primary">Matricule</th>
+            <th matListItemTitle color="primary">Ecole</th>
+            <th matListItemTitle color="primary">Note générale</th>
+            <th matListItemTitle color="primary">Opération</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listEleves; let i=index">
+            <td>
+              <mat-checkbox [(ngModel)]="item.isSelected" (change)="setMultipleSelect()" value="" color="primary" />
+            </td>
+            <td>{{item.nomEleve}}</td>
+            <td>{{item.dateNaissance}}</td>
+            <td>{{item.matricule}}</td>
+            <td>{{item.ecole.nomEcole}}</td>
+            <td>{{item.noteGeneral}}</td>
+            <td>
+              <button mat-icon-button matTooltip="Voir" matTooltipPosition="above" color="primary">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+              <button (click)="updateEleves(i)" mat-icon-button matTooltip="Modifier" matTooltipPosition="above" color="accent">
+                <mat-icon aria-label="Example icon-button with a heart icon">edit</mat-icon>
+              </button>
+
+              <button mat-icon-button matTooltip="Statistique" matTooltipPosition="above" color="accent">
+                <mat-icon aria-label="Example icon-button with a heart icon">bar_chart</mat-icon>
+              </button>
+
+              <button (click)="deleteEleves(i)"  mat-icon-button matTooltip="Supprimer" matTooltipPosition="above" color="warn">
+                <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

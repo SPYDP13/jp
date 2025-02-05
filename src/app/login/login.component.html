@@ -1,0 +1,24 @@
+<div style="background-color: white;display: flex; flex-direction: row; justify-content: center; align-items: center; margin-top: 100px;">
+  <div class="wrapper">
+    <h3 style="color: brown;">{{errorText}}</h3>
+    <h2>Connexion</h2>
+    <div action="#">
+      <div class="input-box">
+        <input [(ngModel)]="email" type="text" placeholder="Entrez votre email" required>
+      </div>
+      <div class="input-box">
+        <input [(ngModel)]="password" type="password" placeholder="Entrer votre mot de passe" required>
+      </div>
+      <div class="policy">
+        <input name="condition" type="checkbox">
+        <h3>J'accepte tous les termes et les conditions d'utilisation de notre application</h3>
+      </div>
+      <div class="input-box button">
+        <input (click)="validate()" type="Submit" value="Valider">
+      </div>
+      <div class="text">
+        <h3>Pas de compte? <a href="#">Créez en !</a></h3>
+      </div>
+    </div>
+  </div>
+</div>

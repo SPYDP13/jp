@@ -1,0 +1,71 @@
+<mat-card>
+
+  <mat-card-content>
+    <h2>Gestion des notes</h2>
+    <div class="row" style="gap: 10px; justify-content: center;">
+      <button matTooltip="Rechercher" matTooltipPosition="above" mat-mini-fab color="primary">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button matTooltip="ExporterCSV" matTooltipPosition="above" mat-mini-fab color="primary">
+        <mat-icon>vertical_align_top</mat-icon>
+      </button>
+    </div>
+
+    <div class="row mt-5" style="gap: 10px; justify-content: center;">
+      <div>
+        <mat-form-field>
+          <mat-select [(ngModel)]="currentAnnee" placeholder="Trier">
+            <mat-option>Aucun</mat-option>
+            <mat-option *ngFor="let item of listAnnee" value="{{item.id}}">{{item.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select [(ngModel)]="currentTri" placeholder="Année scolaire">
+            <mat-option>Aucun</mat-option>
+            <mat-option *ngFor="let item of listTri" value="{{item.id}}">{{item.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th matListItemTitle color="primary">
+              <div *ngIf="MultipleSelect" class="row" style="justify-content: center; gap: 2px;">
+                <button mat-mini-fab color="warn">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <span *ngIf="!MultipleSelect">#</span>
+            </th>
+            <th matListItemTitle color="primary">Eleve</th>
+            <th matListItemTitle color="primary">Note annuelle</th>
+            <th matListItemTitle color="primary">Classe</th>
+            <th matListItemTitle color="primary">Ecole</th>
+            <th matListItemTitle color="primary">Opération</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listNotes; let i=index">
+            <td>
+              <mat-checkbox [(ngModel)]="item.isSelected" (change)="setMultipleSelect()" value="" color="primary" />
+            </td>
+            <td>{{item.eleve}}</td>
+            <td>{{item.valeur}}</td>
+            <td>{{item.classe}}</td>
+            <td>{{item.ecole}}</td>
+            <td>
+              <button mat-icon-button matTooltip="Voir" matTooltipPosition="above" color="primary">
+                <mat-icon>remove_red_eye</mat-icon>
+              </button>
+            </td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

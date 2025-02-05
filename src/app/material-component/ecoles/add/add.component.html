@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>{{data.update ? 'Modifier une école':'Ajouter une école'}}</h2>
+<mat-dialog-content style="min-width: 500px ;" class="mat-typography">
+
+  <div class="nice-form-group">
+    <label>Nom de l'école</label>
+    <input [(ngModel)]="nom" [(ngModel)]="data.ecole.nom" type="text" placeholder="Nom de l'école"/>
+  </div>
+
+  <div class="nice-form-group">
+    <mat-form-field>
+      <mat-select [(ngModel)]="ville" placeholder="Ville">
+        <mat-option>Aucun</mat-option>
+        <mat-option *ngFor="let item of villeList" value="{{item.idVille}}">{{item.nomVille}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions class="gap-2" align="end">
+  <button class="btn w-32 text-white bg-red-500 p-2 rounded rounded-2" mat-button mat-dialog-close>Annuler</button>
+  <button class="btn w-32 text-white bg-green-500 p-2 rounded rounded-2" mat-button (click)="validate()" cdkFocusInitial>Valider</button>
+</mat-dialog-actions>

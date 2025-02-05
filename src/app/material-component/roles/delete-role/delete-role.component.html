@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Supprimer un rôle</h2>
+<mat-dialog-content style="min-width: 500px ;" class="mat-typography">
+  <h3 class="my-5">Voulez-vous réellement supprimer le rôle <b>{{data.role.nom}}</b> ?
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions class="gap-2" align="end">
+  <button class="btn w-32 text-white bg-red-500 p-2 rounded rounded-2" mat-button mat-dialog-close>Annuler</button>
+  <button class="btn w-32 text-white bg-green-500 p-2 rounded rounded-2" mat-button [mat-dialog-close]="true"
+    cdkFocusInitial>Valider</button>
+</mat-dialog-actions>

@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{data.update ? 'Modifier un utilisateur':'Ajouter un utilisateur'}}</h2>
+<mat-dialog-content style="min-width: 500px ;" class="mat-typography">
+
+  <div class="nice-form-group">
+    <label>Nom de l'utilisateur</label>
+    <input [(ngModel)]="nom" style="width: 100%;" [(ngModel)]="data.utilisateur.nom" type="text" placeholder="Nom de l'utilisateur"/>
+  </div>
+
+  <div class="nice-form-group">
+    <label>Email de l'utilisateur</label>
+    <input [(ngModel)]="email" style="width: 100%;" [(ngModel)]="data.utilisateur.email" type="email" placeholder="Email de l'utilisateur"/>
+  </div>
+
+  <div class="nice-form-group">
+    <label>Mot de passe de l'utilisateur</label>
+    <input [(ngModel)]="password" style="width: 100%;" [(ngModel)]="data.utilisateur.password" type="password" placeholder="Mot de passe de l'utilisateur"/>
+  </div>
+
+  <div class="nice-form-group">
+    <mat-form-field>
+      <mat-select [(ngModel)]="role" placeholder="Role de l'utilisateur">
+        <mat-option *ngFor="let item of listRoles" value="{{item.idRole}}">{{item.nomRole}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="role==='1'" class="nice-form-group">
+    <mat-form-field>
+      <mat-select [(ngModel)]="ecole" placeholder="Ecole de l'administrateur">
+        <mat-option *ngFor="let item of listEcole" value="{{item.idEcole}}">{{item.nomEcole}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions class="gap-2" align="end">
+  <button class="btn w-32 text-white bg-red-500 p-2 rounded rounded-2" mat-button mat-dialog-close>Annuler</button>
+  <button class="btn w-32 text-white bg-green-500 p-2 rounded rounded-2" mat-button (click)="validate()" cdkFocusInitial>Valider</button>
+</mat-dialog-actions>

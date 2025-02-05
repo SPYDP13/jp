@@ -1,0 +1,85 @@
+<!-- ============================================================== -->
+<!-- Simple four boxes Row -->
+<!-- ============================================================== -->
+<div class="row">
+  <!-- column -->
+  <div class="col-lg-8 col-sm-12">
+    <app-sales-overview></app-sales-overview>
+  </div>
+  <!-- column -->
+  <!-- column -->
+  <div class="col-lg-4 col-sm-12">
+    <app-our-visiter></app-our-visiter>
+  </div>
+  <!-- column -->
+</div>
+
+<!-- ============================================================== -->
+<!-- Image Card row-->
+<!-- ============================================================== -->
+<div class="row">
+  <!-- Card column -->
+  <div class="w-full gap-5" style="display: flex; flex-direction: row; justify-content: center; ">
+    <div class="nice-form-group">
+      <mat-form-field>
+        <mat-select [(ngModel)]="classe" (valueChange)="classeValueChange($event)" placeholder="Classe">
+          <mat-option>Aucun</mat-option>
+          <mat-option *ngFor="let item of listClasses" value="{{item.idNiveau}}">{{item.nomNiveau}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="nice-form-group">
+      <mat-form-field>
+        <mat-select [(ngModel)]="annee" (valueChange)="anneeValueChange($event)" placeholder="Année">
+          <mat-option>Aucun</mat-option>
+          <mat-option *ngFor="let item of listAnnee"
+            value="{{item.idAnneeScolaire}}">{{item.anneeDebut}}-{{item.anneeFin}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="w-full container mt-3 gap-5 mx-5 row" style="flex-wrap: wrap;" *ngFor="let item of listeEcole">
+    <div class="d-flex flex-row justify-between items-center w-full ">
+      <h3>{{item.nomEcole}}, {{item.ville.nomVille}}</h3>
+      <h3><b>Responsable: </b>{{item.responsable[0].nomUtilisateur}}</h3>
+    </div>
+    <div class="w-full">
+      <div class="w-full">
+        <table class="fl-table">
+          <thead>
+            <tr>
+              <th matListItemTitle color="primary">Nom Eleve</th>
+              <th matListItemTitle color="primary">Note Générale</th>
+              <th matListItemTitle color="primary">Opération</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let itemm of item.listEcole let i=index">
+              <td>
+                {{itemm.nomEleve}}
+              </td>
+              <td>20</td>
+              <td>
+                <button mat-icon-button matTooltip="Voir" matTooltipPosition="above" color="primary">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </button>
+
+                <button mat-icon-button matTooltip="Statistique" matTooltipPosition="above" color="accent">
+                  <mat-icon aria-label="Example icon-button with a heart icon">bar_chart</mat-icon>
+                </button>
+
+                <button mat-icon-button matTooltip="Supprimer" matTooltipPosition="above" color="warn">
+                  <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          <tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>
