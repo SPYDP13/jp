@@ -80,6 +80,9 @@ class UtilisateurController @Autowired constructor(
     @PostMapping("/niveauClasses/create")
     fun createNiveauClasse(@RequestBody niveauClasse: NiveauClasse): NiveauClasse? = utilisateurServiceImpl.createNiveauClasse(niveauClasse)
 
+    @GetMapping("/niveauClasses/delete/{id}")
+    fun deleteNiveauClasse(@PathVariable("id") id: Int): Boolean? = utilisateurServiceImpl.deleteNiveauClasse(id)
+
     @GetMapping("/notes/getAll")
     fun getAllNote(): MutableList<Note>? = utilisateurServiceImpl.getAllNote()
 
@@ -91,6 +94,9 @@ class UtilisateurController @Autowired constructor(
 
     @PostMapping("/eleves/create")
     fun createEleve(@RequestBody eleve: EleveForCreation): Eleve? = utilisateurServiceImpl.createEleve(eleve)
+
+    @GetMapping("/eleves/getById/{id}")
+    fun getEleveById(@PathVariable("id") id: Int): Eleve? = utilisateurServiceImpl.getEleveById(id)
 
     @GetMapping("/matieres/getAll")
     fun getAllMatieres(): MutableList<Matiere>? = utilisateurServiceImpl.getAllMatiere()

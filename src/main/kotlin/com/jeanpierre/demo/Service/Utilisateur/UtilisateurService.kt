@@ -40,13 +40,14 @@ interface UtilisateurService {
 
     fun getAllNiveauClasse(): MutableList<NiveauClasse>?
     fun createNiveauClasse(niveauClasse: NiveauClasse): NiveauClasse?
+    fun deleteNiveauClasse(id: Int): Boolean?
 
     fun getAllNote(): MutableList<Note>?
     fun createNote(note: NoteForCreation): Note?
 
     fun getAllEleve(): MutableList<Eleve>?
     fun createEleve(eleve: EleveForCreation): Eleve?
-
+    fun getEleveById(id: Int):Eleve?
 
     fun getAllMatiere(): MutableList<Matiere>?
     fun createMatiere(matiere: MatiereForCreation): Matiere?

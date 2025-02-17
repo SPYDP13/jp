@@ -7,4 +7,5 @@ interface NiveauClasseService {
     fun create(niveau: NiveauClasse):NiveauClasse?
     fun getAll(): MutableList<NiveauClasse>?
     fun getById(id:Int): NiveauClasse?
+    fun deleteById(id:Int): Boolean?
 }

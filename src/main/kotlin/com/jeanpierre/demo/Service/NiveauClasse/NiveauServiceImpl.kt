@@ -7,25 +7,22 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class NiveauServiceImpl @Autowired constructor(final var niveauRepository: NiveauRepository): NiveauClasseService {
+class NiveauServiceImpl @Autowired constructor(final var niveauRepository: NiveauRepository) : NiveauClasseService {
 
     init {
-        if (niveauRepository.count().toInt()==0){
-            niveauRepository.saveAll(mutableListOf(
-                NiveauClasse(0,"CP1"),
-                NiveauClasse(0,"CP2"),
-                NiveauClasse(0,"CE1"),
-                NiveauClasse(0,"CE2"),
-                NiveauClasse(0,"CM1"),
-                NiveauClasse(0,"CM2"),
-            ))
+        if (niveauRepository.count().toInt() == 0) {
+            niveauRepository.saveAll(
+                mutableListOf(
+                    NiveauClasse(0, "CM2"),
+                )
+            )
         }
     }
 
     override fun create(niveau: NiveauClasse): NiveauClasse? {
         return try {
             niveauRepository.save(niveau)
-        }catch (t:Throwable){
+        } catch (t: Throwable) {
             null
         }
     }
@@ -33,12 +30,21 @@ class NiveauServiceImpl @Autowired constructor(final var niveauRepository: Nivea
     override fun getAll(): MutableList<NiveauClasse>? {
         return try {
             niveauRepository.findAll()
-        }catch (t:Throwable){
+        } catch (t: Throwable) {
             null
         }
     }
 
     override fun getById(id: Int): NiveauClasse? {
         return niveauRepository.findById(id).orElseThrow()
+    }
+
+    override fun deleteById(id: Int): Boolean? {
+        return try {
+            niveauRepository.deleteById(id)
+            true
+        }catch (t:Throwable){
+            false
+        }
     }
 }

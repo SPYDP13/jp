@@ -195,6 +195,10 @@ class UtilisateurServiceImpl @Autowired constructor(
         return niveauClasseService.create(niveauClasse)
     }
 
+    override fun deleteNiveauClasse(id: Int): Boolean? {
+        return niveauClasseService.deleteById(id)
+    }
+
     override fun getAllNote(): MutableList<Note>? {
         return noteService.getAll()
     }
@@ -209,6 +213,10 @@ class UtilisateurServiceImpl @Autowired constructor(
 
     override fun createEleve(eleve: EleveForCreation): Eleve? {
         return eleveService.create(eleve)
+    }
+
+    override fun getEleveById(id: Int): Eleve? {
+        return eleveService.getById(id)
     }
 
     override fun getAllMatiere(): MutableList<Matiere>? {
