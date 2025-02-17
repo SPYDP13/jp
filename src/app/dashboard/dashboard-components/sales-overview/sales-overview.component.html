@@ -2,8 +2,8 @@
   <mat-card-content>
     <div class="d-flex flex-wrap">
       <div>
-        <mat-card-title>Les tendances</mat-card-title>
-        <mat-card-subtitle>Classement en pourcentage de reussite par ecole</mat-card-subtitle>
+        <mat-card-title>Les classements annee {{annee}}</mat-card-title>
+        <mat-card-subtitle>Classement 5meilleurs écoles en pourcentage de reussite par ecole</mat-card-subtitle>
       </div>
       <div class="ml-auto">
         <ul class="list-inline">
@@ -12,29 +12,42 @@
               <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>Ecole
             </h6>
           </li>
-          <li>
-            <h6 class="text-info m-0">
-              <i class="mdi mdi-checkbox-blank-circle font-10 m-r-10"></i>%age
-            </h6>
-          </li>
         </ul>
       </div>
+
+      <div class="mb-10 w-full d-flex flex-row items-center justify-around gap-5">
+        <div class="mx-2 w-25 nice-form-group">
+          <label for="">Année scolaire</label>
+          <div class="containers">
+            <div class="select">
+              <select [(ngModel)]="anneeId" (ngModelChange)="anneeValueChange($event)" placeholder="Annee scolaire">
+                <option *ngFor="let item of listAnnee" value="{{item.idAnneeScolaire}}">
+                  {{item.anneeDebut}}-{{item.anneeFin}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="mx-2 w-25 nice-form-group">
+          <label for="">Classe</label>
+          <div class="containers">
+            <div class="select">
+              <select [(ngModel)]="classeId" (ngModelChange)="anneeValueChange($event)" placeholder="Annee scolaire">
+                <option *ngFor="let item of listClasses" value="{{item.idNiveau}}">
+                  {{item.nomNiveau}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+
     <div>
-      <apx-chart
-        [series]="chartOptions.series"
-        [chart]="chartOptions.chart"
-        [dataLabels]="chartOptions.dataLabels"
-        [plotOptions]="chartOptions.plotOptions"
-        [yaxis]="chartOptions.yaxis"
-        [legend]="chartOptions.legend"
-        [fill]="chartOptions.fill"
-        [stroke]="chartOptions.stroke"
-        [tooltip]="chartOptions.tooltip"
-        [xaxis]="chartOptions.xaxis"
-        [grid]="chartOptions.grid"
-      >
+      <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions" [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+        [xaxis]="chartOptions.xaxis" [grid]="chartOptions.grid">
       </apx-chart>
     </div>
   </mat-card-content>

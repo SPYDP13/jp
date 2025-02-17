@@ -28,7 +28,7 @@ export class AddComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public datas: any,
     public dialogRef: MatDialogRef<AddComponent>,
-    public utilisateurService: UtilisateurServiceService
+    public utilisateurService: UtilisateurServiceService,
   ) {
     this.data = datas
   }

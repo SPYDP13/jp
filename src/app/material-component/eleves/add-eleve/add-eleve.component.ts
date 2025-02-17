@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
 import { DemoMaterialModule } from 'src/app/demo-material-module';
 import { AppServicesService } from 'src/app/services/App/app-services.service';
 import { EleveData, NoteData, NoteData2, UtilisateurServiceService, MatiereData } from 'src/app/services/Utilisateur/utilisateur-service.service';
@@ -27,6 +28,7 @@ export class AddEleveComponent implements OnInit {
   constructor(
     public utilisateurService: UtilisateurServiceService,
     public appService: AppServicesService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -141,7 +143,7 @@ export class AddEleveComponent implements OnInit {
     console.log(eleve);
     this.utilisateurService.createEleve(eleve).subscribe(response=>{
       console.log(response);
-
+      this.router.navigateByUrl('eleves')
 
     }, err=>{
       console.log(err);

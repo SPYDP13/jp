@@ -14,7 +14,8 @@ import { NgFor, NgIf } from '@angular/common';
 	selector: 'app-dashboard',
 	standalone: true,
 	imports: [SalesOverviewComponent, OurVisiterComponent, NgFor, NgIf, ProfileComponent, ContactsComponent, ActivityTimelineComponent, DemoMaterialModule, FormsModule],
-	templateUrl: './dashboard.component.html'
+	templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements AfterViewInit, OnInit {
 
@@ -41,6 +42,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     this.utilisateurService.getAllClasse().subscribe(response=>{
       console.log(response);
       this.listClasses = response.body
+      this.classe = String(this.listClasses[0].idNiveau)
     }, err=>{
       console.log(err);
     })
@@ -60,7 +62,17 @@ export class DashboardComponent implements AfterViewInit, OnInit {
       this.listeEcole = response.body
       this.listeEcole.map(item=>{
         this.utilisateurService.getEcoleEleveByClasseAnnee(item.idEcole, classeId, anneeId).subscribe(response2=>{
-          item.listEcole = response2.body
+          item.listEcole = response2.body //item.listecole c'est liste eleve, une erreur de recupération des données
+
+          var successCount = 0
+          for (let index = 0; index < item.listEcole.length; index++) { //Calcul des notes
+            var generale = this.calculeNote(item.listEcole[index])
+            item.listEcole[index].generale = generale
+            if (generale >= 10) {
+              successCount++
+            }
+          }
+          item.taux = (successCount/item.listEcole.length)*100
         }, err2=>{
           console.log(err2);
         })
@@ -76,6 +88,19 @@ export class DashboardComponent implements AfterViewInit, OnInit {
 
   anneeValueChange(event:any){
     this.getAllEcole(Number(this.classe), Number(event))
+  }
+
+
+  calculeNote(eleve:any){
+    var total = 0
+    var totalCoef = 0
+    for (let index = 0; index < eleve.listNote.length; index++) {
+      var valNote = eleve.listNote[index].valeur
+      var noteCoef = eleve.listNote[index].matiere.coef
+      total = total + valNote*noteCoef
+      totalCoef = totalCoef + noteCoef
+    }
+    return (total/totalCoef)
   }
 
 

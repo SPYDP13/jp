@@ -192,6 +192,15 @@ export class UtilisateurServiceService {
     })
     return this.http.post<HttpResponse<any>>(`${this.api}/niveauClasses/create`, classe, { observe: "response", headers: headers, withCredentials: true })
   }
+  public deleteClasse(id: number): Observable<HttpResponse<any>> {
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": 'Bearer ' + this.appService.getToken()
+    })
+    return this.http.get<HttpResponse<any>>(`${this.api}/niveauClasses/delete/${id}`, { observe: "response", headers: headers, withCredentials: true })
+  }
+
   public getAllMatiere(): Observable<HttpResponse<any>> {
     var headers = new HttpHeaders({
       "Content-Type": "application/json",
@@ -232,6 +241,14 @@ export class UtilisateurServiceService {
       "Authorization": 'Bearer ' + this.appService.getToken()
     })
     return this.http.post<HttpResponse<any>>(`${this.api}/eleves/create`, eleve, { observe: "response", headers: headers, withCredentials: true })
+  }
+  public getEleveById(id: number): Observable<HttpResponse<any>> {
+    var headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": 'Bearer ' + this.appService.getToken()
+    })
+    return this.http.get<HttpResponse<any>>(`${this.api}/eleves/getById/${id}`, { observe: "response", headers: headers, withCredentials: true })
   }
 
   public getAdministratorEcole(id: number): Observable<HttpResponse<any>> {
